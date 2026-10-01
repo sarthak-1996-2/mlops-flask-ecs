@@ -9,7 +9,7 @@ with open("classifier.pkl", "rb") as file:
 
 @app.route("/", methods=['get'])
 def home():
-    return "Welcome to the Load Classifier model"
+    return "Welcome to the Loan Classifier model"
 
 
 @app.route("/ping", methods=['GET'])
@@ -46,6 +46,6 @@ def predict():
     result = cls_model.predict([[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])
 
     if result == 0:
-        return "Your load Rejected"
+        return "Your loan Rejected"
     else:
-        return "Your load Approved"
+        return "Your loan Approved"
