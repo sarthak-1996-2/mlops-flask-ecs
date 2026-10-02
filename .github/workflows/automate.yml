@@ -11,8 +11,27 @@ on:
 
 
 jobs:
-  test:
+  linting:
+    
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v4
+        
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: linting and formating
+        run: |
+          ruff check --fix
+          ruff format .
+        
+      
+  test:
+    needs: linting
     runs-on: ubuntu-latest
 
     steps:
@@ -32,22 +51,3 @@ jobs:
           pytest
 
 
-  linting:
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: git checkout
-        uses: actions/checkout@v4
-        
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          
-      - name: linting and formating
-        run: |
-          ruff check --fix
-          ruff format .
-        
-      
