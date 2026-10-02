@@ -16,20 +16,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: git checkout
-      uses: actions/checkout@v4
-    - name: Set up Python 3.13
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.13"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Unit Test
-      run: |
-        pytest
+      - name: git checkout
+        uses: actions/checkout@v4
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+  
+      - name: Unit Test
+        run: |
+          pytest
 
 
   linting:
@@ -37,9 +37,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: linting and formating
-      run: |
-        ruff check --fix
-        ruff format .
-      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: linting and formating
+        run: |
+          ruff check --fix
+          ruff format .
+        
       
